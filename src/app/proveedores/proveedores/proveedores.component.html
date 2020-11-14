@@ -1,0 +1,41 @@
+<h1>Listado de Proveedores</h1>
+<a class="btn btn-primary float-md-right" routerLink="/addprovee">Añadir
+    nuevo proveedor</a>
+<br>
+<table class="table table-bordered table-striped tabla" style="margin-top: 40px;">
+    <thead>
+        <tr class="filters">
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>CIF</th>
+            <th>Dirección</th>
+            <th>CP</th>
+            <th>Localidad</th>
+            <th>Provincia</th>
+            <th>Contacto</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let proveedor of this.proveedores | paginate:page_size:page_number">
+            <td>{{ proveedor.nombre }}</td>
+            <td><a href="mailto:{{ proveedor.email }}">{{ proveedor.email }}</a></td>
+            <td>{{ proveedor.telefono }}</td>
+            <td>{{ proveedor.cif }}</td>
+            <td>{{ proveedor.direccion }}</td>
+            <td>{{ proveedor.cp }}</td>
+            <td>{{ proveedor.localidad }}</td>
+            <td>{{ proveedor.provincia }}</td>
+            <td>{{ proveedor.contacto }}</td>
+            <td>
+                <button type="button" class="btn btn-success" routerLink="/editpro/{{ proveedor.key }}">Editar</button>
+            </td>
+            <td> <button class="btn btn-danger" (click)="eliminarProveedor(proveedor.key)">Eliminar</button>
+            </td>
+    </tbody>
+</table>
+<mat-paginator [length]="proveedores.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+    (page)="handlePage($event)">
+</mat-paginator>
